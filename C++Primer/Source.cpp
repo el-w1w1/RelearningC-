@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 #include "Sales_item.h"
+#include <vector>
 using namespace std;
 
 //method declarations
@@ -9,13 +11,119 @@ void print_sum();
 void sales();
 void file_stuff();
 void read_file(const char* name);
+void pointer(); 
+
+void pointer2() {
+	//change value of pointer *p1
+	int num1 = 5; 
+	int num2 = 10;
+	const int f = num2; 
+	num2 = 1000; 
+	cout << f << endl; 
+	
+
+	//p1 now points to num1
+	int* p1 = &num1; 
+	std::cout << "p1 is: " << p1 << " and points to value: " << *p1 << std::endl;
+	
+	//p1 now poitns to num2
+	p1 = &num2; 
+	std::cout << "p1 is: " << p1 << " and points to value: " << *p1 << std::endl;
+
+	//change value inside num2
+	*p1 = 25;
+	std::cout << "p1 is: " << p1 << " and points to value: " << *p1 << std::endl;
+
+}
+
+
+
+std::vector<int> sortNumsAscending(std::vector<int> arr) {
+	//manually 
+	cout << sizeof(arr) / sizeof(arr[0]) << endl;
+	for (const auto &i: arr) {
+		cout << i << endl;
+	}
+	int arr_size = sizeof(arr) / sizeof(arr[0]);
+	sort(arr.begin(), arr.end());
+
+	for (const auto& i : arr) {
+		cout << i << ", "; 
+	}
+	
+	return arr; 
+}
+
+//returns number of syllables (with dashes)
+int numberSyllables(std::string word) {
+	const char del = '-';
+	//loop through all letters and count the -
+	int cnt = 1; 
+	for (const auto& i : word) {
+		if (i == '-') {
+			cnt++;
+		}
+	}
+	return cnt; 
+
+	/*
+		other solution:  return std::count(word.begin(),word.end(),'-') + 1;
+	*/
+}
+
+//count words
+int countWords(string str) {
+
+	//split string by ' ' and return length of array (have to do manually? that sucks)
+	//loop through and maintain new_str 
+	string buf = ""; 
+	vector<string> v; 
+	for (const auto& i : str) {
+		if (i == ' ') {
+			v.push_back(buf);
+			buf = "";
+		}
+		else {
+			buf += i; 
+		}
+	}
+	//add last word
+	v.push_back(buf); 
+	
+	//print out vec v
+	int cnt = 0;
+	for (const auto& i : v) {
+		cout << i << endl; 
+		cnt++;
+	}
+
+	return cnt; 
+}
+
+//count words alt
+int countWordsFast(string str) {
+	return count(str.begin(), str.end(), ' ') + 1;
+}
 
 int main() {
-	std::cout << "Hello World" << std::endl; 
-	//print_sum();
-	//sales();
-	//file_stuff();
-	read_file("filename.txt");
+	std::cout << "Hello World" << std::endl;
+	//pointer2(); 
+
+	std::vector<int> test = { 2,5,-4,68,6 };
+	//sortNumsAscending(test);
+	//cout << numberSyllables("test-case-fiwe");
+	cout << countWords("hello world how are you");
+	cout << countWordsFast("test test test four");
+}
+
+
+void pointer() {
+	string food = "test";
+	string* ptr = &food; 
+	cout << food << endl; 
+	cout << &food; 
+	cout << *ptr << endl; 
+	cout << ptr << endl; 
 }
 
 //read file and print shit out
@@ -33,18 +141,7 @@ void read_file(const char* name) {
 		std::cout << "Couldn't open file\n";
 	}
 }
-/** // read file
-ifstream MyReadFile(name);
-const char* contents;
-MyReadFile >> contents;
-// Use a while loop together with the getline() function to read the file line by line
-while (std::getline(MyReadFile, myText)) {
-	// Output the text from the file
-	cout << myText;
-}
 
-MyReadFile.close(); 
-**/
 
 //file input/out
 void file_stuff() {
