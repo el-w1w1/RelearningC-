@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sales_item.cpp" />
+    <ClCompile Include="micro_docs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sales_item.h" />

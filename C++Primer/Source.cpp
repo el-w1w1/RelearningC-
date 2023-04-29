@@ -1,9 +1,10 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <string>
 #include <algorithm>
 #include "Sales_item.h"
 #include <vector>
+#include <regex>
 using namespace std;
 
 //method declarations
@@ -105,6 +106,40 @@ int countWordsFast(string str) {
 	return count(str.begin(), str.end(), ' ') + 1;
 }
 
+/*
+	regex stuff: 
+	void getAllWords() {
+		string seq = "Some words. And... some punctuation.";
+		regex rgx("\\w+");
+
+		for( sregex_iterator it(seq.begin(), seq.end(), rgx), it_end; it != it_end; ++it )
+			cout << (*it)[0] << "\n";
+	}
+*/
+
+//mask stuff (e.g. *re* -> creed) 
+//scrambled([”red”, “dee”, “cede”, “reed”, “creed”, “decree”], “*re**”) ➞ [“creed”]
+using namespace std;
+vector<string> scrambled(vector<string> words, string mask) {
+	//loop through each word
+	vector<string> final; 
+	for (string s : words) {
+		bool isValid = true; 
+		for (int i = 0; i < mask.length(); i++) {
+			//lengths must be same, characters must match up (unless its a *) 
+			if (mask.length() != s.length() || (mask[i] != '*' && mask[i] != s[i])) {
+				isValid = false; 
+				break;
+			}
+		}
+		if (isValid) {
+			final.push_back(s);
+			cout << s << endl;
+		}
+	}
+	return final; 
+}
+
 int main() {
 	std::cout << "Hello World" << std::endl;
 	//pointer2(); 
@@ -114,6 +149,8 @@ int main() {
 	//cout << numberSyllables("test-case-fiwe");
 	cout << countWords("hello world how are you");
 	cout << countWordsFast("test test test four");
+	vector<string> words = {"red", "dee", "code", "creed", "ahjfoewjifwej"};
+	scrambled(words, "*re**");
 }
 
 

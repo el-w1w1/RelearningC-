@@ -1,0 +1,7 @@
+﻿  ch5.cpp
+  Generating code
+  11 of 23 functions (47.8%) were compiled, the rest were copied from previous compilation.
+    6 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  CppCrashCourse.vcxproj -> C:\Users\ashev\source\repos\RelearningC-\CppCrashCourse\x64\Release\CppCrashCourse.exe

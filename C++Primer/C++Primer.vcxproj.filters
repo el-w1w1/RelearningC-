@@ -21,6 +21,9 @@
     <ClCompile Include="Sales_item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="micro_docs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sales_item.h">
